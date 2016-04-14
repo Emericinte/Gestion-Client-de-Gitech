@@ -52,7 +52,7 @@
 			return $checkLogin[0] == 1;
 		}
 		
-	/*	public static function checkUser($base, $login, $pass){
+		public static function checkUser($base, $login, $pass){
 			if(checkLogin($base, $login)){
 				$check=$base->prepare("select password from utilisateur where pseudo=:login");
 				$check->execute(array(
@@ -61,7 +61,7 @@
 				$checkpass = $check->fetch()[0];
 				return $checkpass == crypt($pass, "passer");
 			}else return false;
-		}*/
+		}
 		
 		function getPassword(){
 			return $this->mdp;
@@ -180,6 +180,11 @@
 			':n7' => $status, 
 			':n8' => $detail 
 			 ));
+		}
+		
+		function SupprimerClient($id){
+			$req=$this->base->prepare("delete from client where numero=:n1");
+			$req->execute(array(':n1'=>$id));
 		}
 	}
 ?>

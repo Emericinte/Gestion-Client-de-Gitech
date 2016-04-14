@@ -4,6 +4,14 @@
 	include("header.php");
 	include("navbar.php");
 	include("menu.php");
+	if(isset($_POST["nom"])){
+	$nom=$_POST["nom"];$prenom=$_POST["prenom"];$email=$_POST["email"];$telephone=$_POST["telephone"];$adresse=$_POST["adresse"];
+	$user = new Utilisateur($base);
+	$user->create($nom,$prenom,$email,$telephone);
+	header('Location: listeUser.php');
+	}
+	else{
+
 ?>
 <div class="span9" id="content">
 	<div class="row-fluid">
@@ -82,7 +90,7 @@
   								<button type="button" class="btn">Cancel</button>
   							</div>
 						</fieldset>
-					</form>
+					</form> 
 					<!-- END FORM-->
 				</div>
 			    </div>
@@ -90,14 +98,13 @@
                      	<!-- /block -->
 		    </div>
                      <!-- /validation -->
+                     
+                   
+
 
 <?php
+}
 	include("footer.php");
-	if(isset($_POST["nom"])){
-	$nom=$_POST["nom"];$prenom=$_POST["prenom"];$email=$_POST["email"];$telephone=$_POST["telephone"];$adresse=$_POST["adresse"];
-	$user = new Utilisateur($base);
-	$user->create($nom,$prenom,$email,$telephone);
-	}
-
+	
 ?>
 

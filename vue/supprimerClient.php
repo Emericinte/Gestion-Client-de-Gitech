@@ -16,7 +16,7 @@
 							<a href="index.php">Accueil</a> <span class="divider">/</span>	
 						</li>
 						<li>
-							<a href="index.php">gestion Utilisateurs</a> <span class="divider">/</span>	
+							<a href="index.php">gestion Client</a> <span class="divider">/</span>	
 						</li>
 						<li class="active">Suppression</li>
 					</ul>
@@ -31,14 +31,14 @@
 			 <!-- block -->
 			<div class="block">
 				<div class="navbar navbar-inner block-header">
-					<div class="muted pull-left">Suppression de l'Utilisateur</div>
+					<div class="muted pull-left">Suppression du client</div>
 				</div>
 
 
                 <div class="block-content collapse in">
                 <div class="span12">	
 					<!-- BEGIN FORM-->
-					<form action="listeUser.php" id="form_sample_1" class="form-horizontal" method="post">
+					<form action="index.php" id="form_sample_1" class="form-horizontal" method="post">
 						<fieldset>
  							<div class="control-group">
   								<label class="control-label">numero</label>

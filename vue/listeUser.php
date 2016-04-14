@@ -25,6 +25,22 @@
 	</div>
 </div>
 
+<?php
+	if(isset($_POST) and !empty($_POST['id'])){
+		$user=new Utilisateur($base);
+		$user->SupprimerUtilisateur($_POST['id']);
+        ?>
+     
+    <div class="span9">
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert">&times;</button>
+			<strong>Success!</strong> Utilisateur supprimé avec succès.
+		</div>
+	</div>
+ <?php
+	}
+ ?>
+
 <div class="span9" id="content">
      <div class="row-fluid">
                         <!-- block -->
@@ -57,7 +73,7 @@
                                         </thead>
                                         <tbody>
 											<?php
-												while($donnees=$liste->fetch()){
+											while($donnees=$liste->fetch()){
 											?>
                                             <tr class="gradeX">
                                                 <td><?php echo $donnees["id"];?></td>
@@ -66,14 +82,36 @@
                                                 <td class="center"> <?php echo $donnees["mail"];?></td>
                                                 <td class="center">
 													<a class="btn btn-success" href="#" title="afficher">
-														<i class="icon-zoom-in icon-white"></i>  
+														<i class="icon-zoom-in icon-white"></i> détails 
 													</a>
 													<a class="btn btn-info" href="ModifUser.php?numero=<?php echo $donnees['id'];?>" title="modifier">
-														<i class="icon-edit icon-white"></i>
+														<i class="icon-edit icon-white"></i>modifier
 													</a>
-													<a class="btn btn-danger" href="#" title="supprimer">
-														<i class="icon-trash icon-white"></i>
-													</a>
+														<button type="button" title="supprimer" class="btn btn-danger" data-toggle="modal" data-target="#supp<?php echo $donnees['id'];?>"><i class="icon-trash icon-white"></i>Supprimer</button>
+													<!-- Modal -->
+														<div id="supp<?php echo $donnees['id'];?>" class="modal fade" role="dialog">
+														  <div class="modal-dialog">
+															<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title">Supression</h4>
+															  </div>
+															  <div class="modal-body">
+																<p>Voulez vous vraiement supprimer le client numéro: <?php echo $donnees['id'];?></p>
+															  </div>
+															  <div class="modal-footer">
+																<form method="post">
+																<input type="hidden" name="id" value="<?php echo $donnees['id'];?>">
+																<button type="submit" class="btn btn-info">oui</button>
+																<button type="button" class="btn btn-default" data-dismiss="modal">non</button>
+																</form>
+															  </div>
+															</div>
+
+														  </div>
+														</div>
+                                                
                                                 </td>
                                             </tr>
                                             <?php

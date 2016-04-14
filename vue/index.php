@@ -25,6 +25,23 @@
 	</div>
 </div>
 
+<?php
+	if(isset($_POST) and !empty($_POST['id'])){
+		$user=new Client($base);
+		$user->SupprimerClient($_POST['id']);
+        ?>
+     
+    <div class="span9">
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert">&times;</button>
+			<strong>Success!</strong> Client supprimé avec succès.
+		</div>
+	</div>
+ <?php
+	}
+ ?>
+
+
 <div class="span9" id="content">
      <div class="row-fluid">
                         <!-- block -->
@@ -79,15 +96,81 @@
                                                 <td><span class="<?php echo $vue;?>"><?php echo $donnees["status"];?></span></td>
                                                 <td class="center"> <?php echo $donnees["detail"];?></td>
                                                 <td class="center">
-													<a class="btn btn-success" href="#" title="afficher">
-														<i class="icon-zoom-in icon-white"></i>  
+													<button type="button" title="detail" class="btn btn-success" data-toggle="modal" data-target="#detail<?php echo $donnees['numero'];?>"><i class="icon-zoom-in icon-white"></i></button> 
+													
+								<!--  affichage de l'utilisateur -->
+        <div class="modal fade" id="detail<?php echo $donnees['numero'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">×</button>
+							<h3>matricule <?php echo $donnees['numero'];?> </h3>
+						</div>
+						<div class="modal-body">
+							<div class="box-inner homepage-box">
+								<div class="box-content">
+									<ul class="nav nav-tabs" id="myTab">
+										<li class="active"><a href="#info">etat civil</a></li>
+										<li><a href="#custom">Contact</a></li>
+										<li><a href="#messages">Parents</a></li>
+									</ul>
+									<div id="myTabContent" class="tab-content">
+										<div class="tab-pane active" id="info">
+											<div class="etat-civil">
+											salut
+										</div>
+									</div>
+										
+										<div class="tab-pane" id="custom">
+											salut 2
+										</div>
+										<div class="tab-pane" id="messages">
+											salut 3
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+							</div>
+							</div>
+						</div>
+	
+													
+													
+													
 													</a>
+													
+													
+													
+													
 													<a class="btn btn-info" href="modifierClient.php?numero=<?php echo $donnees['numero'];?>" title="modifier">
 														<i class="icon-edit icon-white"></i>
 													</a>
-													<a class="btn btn-danger" href="#" title="supprimer">
-														<i class="icon-trash icon-white"></i>
-													</a>
+													<button type="button" title="supprimer" class="btn btn-danger" data-toggle="modal" data-target="#supp<?php echo $donnees['numero'];?>"><i class="icon-trash icon-white"></i></button>
+													<!-- Modal -->
+														<div id="supp<?php echo $donnees['numero'];?>" class="modal fade" role="dialog">
+														  <div class="modal-dialog">
+															<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title">Supression</h4>
+															  </div>
+															  <div class="modal-body">
+																<p>Voulez vous vraiement supprimer le client numéro: <?php echo $donnees['numero'];?></p>
+															  </div>
+															  <div class="modal-footer">
+																<form method="post">
+																<input type="hidden" name="id" value="<?php echo $donnees['numero'];?>">
+																<button type="submit" class="btn btn-info">oui</button>
+																<button type="button" class="btn btn-default" data-dismiss="modal">non</button>
+																</form>
+															  </div>
+															</div>
+
+														  </div>
+														</div>
+                                                
                                                 </td>
                                             </tr>
                                             <?php
@@ -103,8 +186,8 @@
                        </div>
                 
 
-
 <?php
 	include("footer.php");
 ?>
+
 
